@@ -235,7 +235,6 @@ button:hover {
 /*#endregion*/
 
 /*#region media query*/
-
 /* full size desktop break point */
 @media (max-width: 1024px) {
 }
@@ -289,5 +288,4 @@ button:hover {
         font-size: 1.200rem;
     }
 }
-
 /*#endregion*/
