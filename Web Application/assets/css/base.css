@@ -1,0 +1,293 @@
+/*#region font face declarations*/
+/*#region roboto light*/
+@font-face {
+    src: url(./../fonts/roboto/robotothin.ttf);
+    font-family: roboto;
+    font-weight: 200;
+}
+
+@font-face {
+    src: url(./../fonts/roboto/robotothinitalic.ttf);
+    font-family: roboto;
+    font-weight: 200;
+    font-style: italic;
+}
+
+/*#endregion roboto light*/
+
+/*#region roboto light*/
+@font-face {
+    src: url(./../fonts/roboto/robotolight.ttf);
+    font-family: roboto;
+    font-weight: 300;
+}
+
+@font-face {
+    src: url(./../fonts/roboto/robotolightitalic.ttf);
+    font-family: roboto;
+    font-weight: 300;
+    font-style: italic;
+}
+
+/*#endregion roboto light*/
+
+/*#region roboto regular */
+@font-face {
+    src: url(./../fonts/roboto/robotoregular.ttf);
+    font-family: roboto;
+    font-weight: 400;
+}
+
+@font-face {
+    src: url(./../fonts/roboto/robotoitalic.ttf);
+    font-family: roboto;
+    font-weight: 400;
+    font-style: italic;
+}
+
+/*#endregion roboto regular */
+
+/*#region roboto medium*/
+@font-face {
+    src: url(./../fonts/roboto/robotomedium.ttf);
+    font-family: roboto;
+    font-weight: 500;
+}
+
+@font-face {
+    src: url(./../fonts/roboto/robotomediumitalic.ttf);
+    font-family: roboto;
+    font-weight: 500;
+    font-style: italic;
+}
+
+/*#endregion roboto medium*/
+
+/*#region roboto bold*/
+@font-face {
+    src: url(./../fonts/roboto/robotobold.ttf);
+    font-family: roboto;
+    font-weight: 600;
+}
+
+@font-face {
+    src: url(./../fonts/roboto/robotobolditalic.ttf);
+    font-family: roboto;
+    font-weight: 600;
+    font-style: italic;
+}
+
+/*#endregion roboto bold*/
+
+/*#region roboto black*/
+@font-face {
+    src: url(./../fonts/roboto/robotoblack.ttf);
+    font-family: roboto;
+    font-weight: 700;
+}
+
+@font-face {
+    src: url(./../fonts/roboto/robotoblackitalic.ttf);
+    font-family: roboto;
+    font-weight: 700;
+    font-style: italic;
+}
+
+/*#endregion roboto black*/
+/*#endregion*/
+
+/*#region css reset*/
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Prevent font size inflation */
+html {
+    -moz-text-size-adjust: none;
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+}
+
+/* Remove default margin in favour of better control in authored CSS */
+body, h1, h2, h3, h4, p,
+figure, blockquote, dl, dd {
+    margin-block-end: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role='list'],
+ol[role='list'] {
+    list-style: none;
+}
+
+/* Set core body defaults */
+body {
+    min-height: 100vh;
+    line-height: 1.5;
+}
+
+/* Set shorter line heights on headings and interactive elements */
+h1, h2, h3, h4,
+button, input, label {
+    line-height: 1.1;
+}
+
+/* Balance text wrapping on headings */
+h1, h2,
+h3, h4 {
+    text-wrap: balance;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+    text-decoration-skip-ink: auto;
+    color: currentColor;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+    max-width: 100%;
+    display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input, button,
+textarea, select {
+    font-family: inherit;
+    font-size: inherit;
+}
+
+/* Make sure text areas without a rows attribute are not tiny */
+textarea:not([rows]) {
+    min-height: 10em;
+}
+
+/* Anything that has been anchored to should have extra scroll margin */
+:target {
+    scroll-margin-block: 5ex;
+}
+
+/*#endregion*/
+
+/*#region setup styles*/
+::selection {
+    background: rgba(84, 200, 255, 0.25);
+}
+
+html {
+    font-size: 100%;
+}
+
+h1 {
+    font-size: 4.210rem;
+}
+
+h2 {
+    font-size: 3.158rem;
+}
+
+h3 {
+    font-size: 2.369rem;
+}
+
+h4 {
+    font-size: 1.777rem;
+}
+
+h5 {
+    font-size: 1.333rem;
+}
+
+small {
+    font-size: 0.750rem;
+}
+
+p {
+    font-size: 1.25rem;
+    line-height: 1.5;
+}
+
+body {
+    font-family: roboto, system-ui, sans-serif;
+}
+
+button {
+    cursor: pointer;
+    background-color: transparent;
+    border: 2px solid #222222;
+    padding: 0.8rem 1.2rem;
+    font-size: 1.25rem;
+    color: #222222;
+    transition: all 0.15s ease-out;
+}
+
+button:hover {
+    background-color: #222222;
+    color: #FFFFFF;
+}
+
+/*#endregion*/
+
+/*#region media query*/
+
+/* full size desktop break point */
+@media (max-width: 1024px) {
+}
+
+/* tablet break point */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 3.053rem;
+    }
+
+    h2 {
+        font-size: 2.442rem;
+    }
+
+    h3 {
+        font-size: 1.954rem;
+    }
+
+    h4 {
+        font-size: 1.563rem;
+    }
+
+    h5 {
+        font-size: 1.250rem;
+    }
+}
+
+/* large phone break point */
+@media (max-width: 425px) {
+}
+
+/* small phone break point */
+@media (max-width: 320px) {
+    h1 {
+        font-size: 2.489rem;
+    }
+
+    h2 {
+        font-size: 2.074rem;
+    }
+
+    h3 {
+        font-size: 1.728rem;
+    }
+
+    h4 {
+        font-size: 1.440rem;
+    }
+
+    h5 {
+        font-size: 1.200rem;
+    }
+}
+
+/*#endregion*/
