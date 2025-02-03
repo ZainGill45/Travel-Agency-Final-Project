@@ -33,7 +33,6 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: var(--spacing-md);
-    margin-block: var(--spacing-md);
     gap: var(--spacing-md);
     background-color: var(--secondary-color);
     border-radius: var(--border-radius);
@@ -104,7 +103,7 @@ header {
 }
 
 .query-detail {
-    padding: 3px var(--spacing-sm);
+    padding: 0px var(--spacing-sm);
     border-radius: var(--border-radius);
 }
 
@@ -128,7 +127,7 @@ header {
     font-size: var(--spacing-lg);
     padding-inline: var(--spacing-sm);
     color: var(--text-color);
-    margin-bottom: 0.15rem;
+    margin-bottom: 0.25rem;
     margin-top: 0.75rem;
 }
 
