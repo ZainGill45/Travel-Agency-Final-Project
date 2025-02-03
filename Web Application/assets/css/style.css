@@ -74,7 +74,7 @@ header {
 
 .query-detail {
     font-size: 1.25rem;
-    margin-block: 10px;
+    margin-block: 5px;
 }
 
 .collapsible {
@@ -90,4 +90,13 @@ header {
     font-weight: bold;
     font-size: 1.4rem;
     margin-left: 0.25rem;
+}
+
+@media (max-width: 1024px) {
+    #main-container {
+        flex-direction: column;
+    }
+    .container {
+        width: 100%;
+    }
 }

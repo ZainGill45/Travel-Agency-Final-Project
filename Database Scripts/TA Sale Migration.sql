@@ -14,6 +14,7 @@ CREATE OR REPLACE PROCEDURE migrate_sale_data AS
     v_booking_tax_amount       NUMBER;
     v_booking_total_amount     NUMBER;
     v_current_billing_id       NUMBER;
+    v_current_booking_id       NUMBER;
 BEGIN
     FOR legacy IN (SELECT * FROM LEGACY_SALE)
         LOOP
@@ -130,14 +131,39 @@ BEGIN
                 v_current_bill_description := legacy.BILL_DESCRIPTION;
             end if;
 
-            INSERT INTO BILLING (CUSTOMER_ID,
+            BEGIN
+                SELECT booking_id
+                INTO v_current_booking_id
+                FROM BOOKING b
+                WHERE b.product_category_id = legacy.product_category
+                    AND b.supplier_id = legacy.product_supplier_id
+                    AND b.itinerary_id = legacy.itinerary_#
+                ORDER BY booking_id
+                FETCH FIRST 1 ROW ONLY;
+            EXCEPTION
+                WHEN NO_DATA_FOUND THEN
+                    DBMS_OUTPUT.PUT_LINE('No matching booking found for legacy sale: ' || legacy.itinerary_#);
+                    v_current_booking_id := 0;
+                WHEN TOO_MANY_ROWS THEN
+                    SELECT booking_id
+                    INTO v_current_booking_id
+                    FROM BOOKING b
+                    WHERE b.product_category_id = legacy.product_category
+                        AND b.supplier_id = legacy.product_supplier_id
+                        AND b.itinerary_id = legacy.itinerary_#
+                    ORDER BY booking_id
+                    FETCH FIRST 1 ROW ONLY;
+            END;
+
+
+            INSERT INTO BILLING (BOOKING_ID,
                                  BILLING_DATE,
                                  BILL_DESCRIPTION,
                                  BASE_PRICE,
                                  AGENCY_FEE,
                                  TOTAL_AMOUNT,
                                  PAID_AMOUNT)
-            VALUES (legacy.CUST_ID,
+            VALUES (v_current_booking_id,
                     legacy.SALE_DATE,
                     v_current_bill_description,
                     legacy.BASE_PRICE_EXCLUDING_TAX,
