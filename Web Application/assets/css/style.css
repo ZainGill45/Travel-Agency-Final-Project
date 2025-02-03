@@ -7,8 +7,7 @@
     --text-color-light: #666666;
     --border-color: #222222;
     --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    --border-radius: 12px;
-    --border-radius-sm: 8px;
+    --border-radius: 8px;
     --spacing-sm: 0.5rem;
     --spacing-md: 1rem;
     --spacing-lg: 1.3rem;
@@ -91,7 +90,7 @@ header {
     width: 50%;
     padding: var(--spacing-lg);
     text-align: left;
-    border-radius: var(--border-radius);
+    border-radius: calc(var(--border-radius) * 1.5);
     background-color: var(--secondary-color);
     border: 2px solid var(--border-color);
 }
@@ -105,12 +104,14 @@ header {
 
 .query-detail {
     padding: 3px var(--spacing-sm);
+    border-radius: var(--border-radius);
 }
 
 .collapsible {
     margin: var(--spacing-sm);
     background-color: #FFFFFF;
     border: 2px solid var(--border-color);
+    border-radius: var(--border-radius);
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: var(--shadow);
@@ -127,7 +128,7 @@ header {
     padding-inline: var(--spacing-sm);
     color: var(--text-color);
     margin-bottom: 0.15rem;
-    margin-top: 1rem;
+    margin-top: 0.75rem;
 }
 
 .collapsible summary {
