@@ -87,7 +87,7 @@ header {
 
 .container { 
     width: 50%;
-    padding: var(--spacing-lg);
+    padding: var(--spacing-md) var(--spacing-lg);
     text-align: left;
     border-radius: calc(var(--border-radius) * 1.5);
     background-color: var(--secondary-color);
