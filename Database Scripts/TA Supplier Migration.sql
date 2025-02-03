@@ -3,7 +3,7 @@ BEGIN
 END;
 /
 
-CREATE OR PROCEDURE migrate_supplier_data AS
+CREATE OR REPLACE PROCEDURE migrate_supplier_data AS
     v_current_email VARCHAR2(128);
     v_current_web VARCHAR2(128);
     v_current_country VARCHAR2(128);

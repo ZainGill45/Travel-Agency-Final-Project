@@ -1,9 +1,9 @@
 BEGIN 
-    create_ta_database;
+    create_ta_tables;
 END;
 /
 
-CREATE OR PROCEDURE create_travel_agency_tables AS
+CREATE OR REPLACE PROCEDURE create_ta_tables AS
     v_table_exists NUMBER;
 BEGIN
     -- Drop existing tables if they exist
@@ -183,18 +183,20 @@ BEGIN
                 REFERENCES TAX_TYPE (tax_type_id)
         )';
 
+    COMMIT;
+
     -- Insert legacy data
-    INSERT INTO AGENT (agent_id, first_name, last_name)
-    VALUES (0, 'Legacy', 'Agent');
-
-    INSERT INTO SUPPLIER (supplier_id, contact_name)
-    VALUES (0, 'LEGACY SUPPLIER');
-
-    INSERT INTO PRODUCT (product_category_id, supplier_id, company_name, product_description)
-    VALUES (0, 0, 'LEGACY PRODUCT', 'PRODUCT DESCRIPTION');
-
-    INSERT INTO TAX_TYPE (tax_type_id, tax_type)
-    VALUES (0, 'LEGACY TAX');
+    EXECUTE IMMEDIATE 'INSERT INTO AGENT (agent_id, first_name, last_name) 
+                      VALUES (0, ''Legacy'', ''Agent'')';
+    
+    EXECUTE IMMEDIATE 'INSERT INTO SUPPLIER (supplier_id, contact_name) 
+                      VALUES (0, ''LEGACY SUPPLIER'')';
+    
+    EXECUTE IMMEDIATE 'INSERT INTO PRODUCT (product_category_id, supplier_id, company_name, product_description) 
+                      VALUES (0, 0, ''LEGACY PRODUCT'', ''PRODUCT DESCRIPTION'')';
+    
+    EXECUTE IMMEDIATE 'INSERT INTO TAX_TYPE (tax_type_id, tax_type) 
+                      VALUES (0, ''LEGACY TAX'')';
 
     COMMIT;
 EXCEPTION
