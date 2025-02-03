@@ -1,14 +1,166 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Travel Agency Web Interface</title>
-    <link rel="stylesheet" href="assets/css/base.css"/>
-    <link rel="stylesheet" href="assets/css/style.css"/>
-</head>
-<body>
-<h1>Hello World</h1>
-<script src="assets/js/client.js"></script>
-</body>
+    <link rel="stylesheet" href="assets/css/base.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body>
+    <header>
+      <input
+        type="text"
+        id="search-input"
+        placeholder="Search By Customer ID..."
+      />
+      <button id="search-button">Find Customer</button>
+    </header>
+
+    <main id="main-container">
+      <section class="container">
+        <h1>General Information</h1>
+        <p class="query-detail">Name:</p>
+        <p class="query-detail">Email:</p>
+        <p class="query-detail">Phone:</p>
+        <p class="query-detail">Address:</p>
+      </section>
+      <section class="container">
+        <h1>Itinerary Information</h1>
+        <details class="collapsible">
+          <summary>
+            <!--Query database for real itinerary number -->
+            Itinerary#:587256
+          </summary>
+          <p class="query-detail">
+            <!--Query for itinerary details here-->
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ratione
+            distinctio alias debitis laboriosam, repellat mollitia a eius
+            consequatur reprehenderit sunt saepe fuga, facilis architecto sed
+            quam ipsum. Aliquam, doloribus sequi?
+          </p>
+          <details class="collapsible">
+            <summary>
+              <!--Query for booking #-->
+              #4525
+            </summary>
+            <p class="query-detail">
+              <!--Query for Booking details-->
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+              Corporis, delectus velit, quo iusto aliquid in accusamus cumque
+              reiciendis id earum architecto assumenda asperiores eligendi quod
+              laboriosam voluptas, eos itaque necessitatibus?
+            </p>
+            <p class="query-detail">
+              <!--Query for billing information-->
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque
+              voluptates tempore amet quia est. Enim nemo deserunt delectus
+              saepe assumenda rerum minima corporis quaerat illum officia
+              perferendis omnis, eaque vero.
+            </p>
+          </details>
+        </details>
+        <details class="collapsible">
+          <summary>
+            <!--Query database for real itinerary number -->
+            Itinerary#:587256
+          </summary>
+          <p class="query-detail">
+            <!--Query for itinerary details here-->
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ratione
+            distinctio alias debitis laboriosam, repellat mollitia a eius
+            consequatur reprehenderit sunt saepe fuga, facilis architecto sed
+            quam ipsum. Aliquam, doloribus sequi?
+          </p>
+          <details class="collapsible">
+            <summary>
+              <!--Query for booking #-->
+              Booking#:4525
+            </summary>
+            <p class="query-detail">
+              <!--Query for Booking details-->
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+              Corporis, delectus velit, quo iusto aliquid in accusamus cumque
+              reiciendis id earum architecto assumenda asperiores eligendi quod
+              laboriosam voluptas, eos itaque necessitatibus?
+            </p>
+            <p class="query-detail">
+              <!--Query for billing information-->
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque
+              voluptates tempore amet quia est. Enim nemo deserunt delectus
+              saepe assumenda rerum minima corporis quaerat illum officia
+              perferendis omnis, eaque vero.
+            </p>
+          </details>
+        </details>
+        <details class="collapsible">
+          <summary>
+            <!--Query database for real itinerary number -->
+            Itinerary#:587256
+          </summary>
+          <p class="query-detail">
+            <!--Query for itinerary details here-->
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ratione
+            distinctio alias debitis laboriosam, repellat mollitia a eius
+            consequatur reprehenderit sunt saepe fuga, facilis architecto sed
+            quam ipsum. Aliquam, doloribus sequi?
+          </p>
+          <details class="collapsible">
+            <summary>
+              <!--Query for booking #-->
+              Booking#:4525
+            </summary>
+            <p class="query-detail">
+              <!--Query for Booking details-->
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+              Corporis, delectus velit, quo iusto aliquid in accusamus cumque
+              reiciendis id earum architecto assumenda asperiores eligendi quod
+              laboriosam voluptas, eos itaque necessitatibus?
+            </p>
+            <p class="query-detail">
+              <!--Query for billing information-->
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque
+              voluptates tempore amet quia est. Enim nemo deserunt delectus
+              saepe assumenda rerum minima corporis quaerat illum officia
+              perferendis omnis, eaque vero.
+            </p>
+          </details>
+        </details>
+        <details class="collapsible">
+          <summary>
+            <!--Query database for real itinerary number -->
+            #587256
+          </summary>
+          <p class="query-detail">
+            <!--Query for itinerary details here-->
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ratione
+            distinctio alias debitis laboriosam, repellat mollitia a eius
+            consequatur reprehenderit sunt saepe fuga, facilis architecto sed
+            quam ipsum. Aliquam, doloribus sequi?
+          </p>
+          <details class="collapsible">
+            <summary>
+              <!--Query for booking #-->
+              #4525
+            </summary>
+            <p class="query-detail">
+              <!--Query for Booking details-->
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+              Corporis, delectus velit, quo iusto aliquid in accusamus cumque
+              reiciendis id earum architecto assumenda asperiores eligendi quod
+              laboriosam voluptas, eos itaque necessitatibus?
+            </p>
+            <p class="query-detail">
+              <!--Query for billing information-->
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque
+              voluptates tempore amet quia est. Enim nemo deserunt delectus
+              saepe assumenda rerum minima corporis quaerat illum officia
+              perferendis omnis, eaque vero.
+            </p>
+          </details>
+        </details>
+      </section>
+    </main>
+    <script src="assets/js/client.js"></script>
+  </body>
 </html>
