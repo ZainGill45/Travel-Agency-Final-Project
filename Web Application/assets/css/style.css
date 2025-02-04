@@ -1,8 +1,8 @@
 :root {
   --primary-color: #2563eb;
   --primary-hover: #1d4ed8;
-  --bg-color: #f8fafc;
-  --card-bg: #ffffff;
+  --bg-color: #e5e7eb;
+  --card-bg: #f9fafb;
   --text-primary: #1f2937;
   --text-secondary: #4b5563;
   --border-color: #e5e7eb;
@@ -39,7 +39,6 @@ body {
 }
 
 .search-container {
-  max-width: 64rem;
   margin: 0 auto;
   display: flex;
   gap: 1rem;
@@ -139,13 +138,13 @@ body {
 }
 
 .collapsible-header:hover {
-  background-color: #f3f4f6;
+  background-color: #e5e7eb;
 }
 
 .chevron-icon {
   width: 20px;
   height: 20px;
-  transition: transform 0.2s ease;
+  transition: transform 0.3s ease;
 }
 
 details[open] > summary .chevron-icon {
@@ -155,22 +154,20 @@ details[open] > summary .chevron-icon {
 .collapsible-content {
   padding: 1rem;
   background-color: var(--card-bg);
-  animation: slideDown 0.2s ease-out;
-  overflow: hidden;
-  transition: max-height 0.3s ease-out;
 }
 
-/* Remove fixed max-height to allow dynamic content */
-details[open] > .collapsible-content {
-  max-height: none;
+details[open] > .collapsible-header {
+  background-color: #e5e7eb;
 }
 
 .nested {
   margin-top: 1rem;
 }
 
-.nested {
-  margin-top: 1rem;
+.nested .collapsible-content {
+  transition: max-height 0.3s ease-out,
+              opacity 0.3s ease-out,
+              padding 0.3s ease-out;
 }
 
 .subsection-title {
@@ -178,18 +175,6 @@ details[open] > .collapsible-content {
   font-weight: 600;
   margin: 1rem 0 0.5rem;
   color: var(--text-primary);
-}
-
-/* Animations */
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 /* Responsive Design */

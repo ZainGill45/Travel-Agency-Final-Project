@@ -2,94 +2,234 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Travel Agency Web Interface</title>
-  <link rel="stylesheet" href="assets/css/base.css" />
-  <link rel="stylesheet" href="assets/css/style.css" />
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Travel Agency Web Interface</title>
+	<link rel="stylesheet" href="assets/css/base.css" />
+	<link rel="stylesheet" href="assets/css/style.css" />
 </head>
 
 <body>
-  <div class="min-h-screen">
-    <!-- Header -->
-    <header class="header">
-      <div class="search-container">
-        <input type="text" id="search-input" placeholder="Search By Customer ID..." class="search-input">
-        <button id="search-button" class="search-button">
-          Find Customer
-        </button>
-      </div>
-    </header>
+	<div class="min-h-screen">
+		<!-- Header -->
+		<header class="header">
+			<div class="search-container">
+				<input type="text" id="search-input" placeholder="Search By Customer ID..." class="search-input">
+				<button id="search-button" class="search-button">
+					Find Customer
+				</button>
+			</div>
+		</header>
 
-    <!-- Main Content -->
-    <main class="main-container">
-      <!-- Customer Info Card -->
-      <section class="card">
-        <h2 class="card-title">General Information</h2>
-        <div class="info-container">
-          <p class="info-item">
-            <span class="info-label">Name:</span>
-            Zain Gill
-          </p>
-          <p class="info-item">
-            <span class="info-label">Email:</span>
-            zaingill45@gmail.com
-          </p>
-          <p class="info-item">
-            <span class="info-label">Phone:</span>
-            +1 (587)-889-5361
-          </p>
-          <p class="info-item">
-            <span class="info-label">Address:</span>
-            40 Skyview Shores Manor NE
-          </p>
-        </div>
-      </section>
+		<!-- Main Content -->
+		<main class="main-container">
+			<!-- Customer Info Card -->
+			<section class="card">
+				<h2 class="card-title">General Information</h2>
+				<div class="info-container">
+					<p class="info-item">
+						<span class="info-label">Name:</span>
+						Zain Gill
+					</p>
+					<p class="info-item">
+						<span class="info-label">Email:</span>
+						zaingill45@gmail.com
+					</p>
+					<p class="info-item">
+						<span class="info-label">Phone:</span>
+						+1 (587)-889-5361
+					</p>
+					<p class="info-item">
+						<span class="info-label">Address:</span>
+						40 Skyview Shores Manor NE
+					</p>
+				</div>
+			</section>
 
-      <!-- Itinerary Card -->
-      <section class="card">
-        <h2 class="card-title">Itinerary Information</h2>
-        <div class="collapsible-container">
-          <details class="collapsible">
-            <summary class="collapsible-header">
-              <span>Itinerary: 587256</span>
-              <svg class="chevron-icon" viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
-                stroke-width="2" fill="none">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </summary>
-            <div class="collapsible-content">
-              <p class="info-item">Booking Date: 2021-09-01</p>
-              <p class="info-item">Start Date: 2021-09-01</p>
-              <p class="info-item">End Date: 2021-09-01</p>
+			<!-- Itinerary Card -->
+			<section class="card">
+				<h2 class="card-title">Itinerary Information</h2>
+				<div class="collapsible-container">
+					<details class="collapsible">
+						<summary class="collapsible-header">
+							<span>Itinerary: 587256</span>
+							<svg class="chevron-icon" viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
+								stroke-width="2" fill="none">
+								<polyline points="6 9 12 15 18 9"></polyline>
+							</svg>
+						</summary>
+						<div class="collapsible-content">
+							<p class="info-item">Booking Date: 2021-09-01</p>
+							<p class="info-item">Start Date: 2021-09-01</p>
+							<p class="info-item">End Date: 2021-09-01</p>
 
-              <details class="collapsible nested">
-                <summary class="collapsible-header">
-                  <span>Booking: 4525</span>
-                  <svg class="chevron-icon" viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
-                    stroke-width="2" fill="none">
-                    <polyline points="6 9 12 15 18 9"></polyline>
-                  </svg>
-                </summary>
-                <div class="collapsible-content">
-                  <p class="info-item">Product Type: Flight</p>
-                  <p class="info-item">Description: Calgary/Toronto/Calgary</p>
-                  <p class="info-item">Company: ICELANDAIR</p>
-                  <p class="info-item">Contact: 9024967480</p>
+							<details class="collapsible nested">
+								<summary class="collapsible-header">
+									<span>Booking: 4525</span>
+									<svg class="chevron-icon" viewBox="0 0 24 24" width="24" height="24"
+										stroke="currentColor" stroke-width="2" fill="none">
+										<polyline points="6 9 12 15 18 9"></polyline>
+									</svg>
+								</summary>
+								<div class="collapsible-content">
+									<p class="info-item">Product Type: Flight</p>
+									<p class="info-item">Description: Calgary/Toronto/Calgary</p>
+									<p class="info-item">Company: ICELANDAIR</p>
+									<p class="info-item">Contact: 9024967480</p>
 
-                  <h3 class="subsection-title">Booking Billing Details</h3>
-                  <p class="info-item">Base Price: $895</p>
-                  <p class="info-item">Tax Amount: $75</p>
-                  <p class="info-item">Total Price: $970</p>
-                </div>
-              </details>
-            </div>
-          </details>
-        </div>
-      </section>
-    </main>
-  </div>
-  <script src="assets/js/client.js"></script>
+									<h3 class="subsection-title">Booking Billing Details</h3>
+									<p class="info-item">Base Price: $895</p>
+									<p class="info-item">Tax Amount: $75</p>
+									<p class="info-item">Total Price: $970</p>
+								</div>
+							</details>
+						</div>
+					</details>
+					<details class="collapsible">
+						<summary class="collapsible-header">
+							<span>Itinerary: 587256</span>
+							<svg class="chevron-icon" viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
+								stroke-width="2" fill="none">
+								<polyline points="6 9 12 15 18 9"></polyline>
+							</svg>
+						</summary>
+						<div class="collapsible-content">
+							<p class="info-item">Booking Date: 2021-09-01</p>
+							<p class="info-item">Start Date: 2021-09-01</p>
+							<p class="info-item">End Date: 2021-09-01</p>
+
+							<details class="collapsible nested">
+								<summary class="collapsible-header">
+									<span>Booking: 4525</span>
+									<svg class="chevron-icon" viewBox="0 0 24 24" width="24" height="24"
+										stroke="currentColor" stroke-width="2" fill="none">
+										<polyline points="6 9 12 15 18 9"></polyline>
+									</svg>
+								</summary>
+								<div class="collapsible-content">
+									<p class="info-item">Product Type: Flight</p>
+									<p class="info-item">Description: Calgary/Toronto/Calgary</p>
+									<p class="info-item">Company: ICELANDAIR</p>
+									<p class="info-item">Contact: 9024967480</p>
+
+									<h3 class="subsection-title">Booking Billing Details</h3>
+									<p class="info-item">Base Price: $895</p>
+									<p class="info-item">Tax Amount: $75</p>
+									<p class="info-item">Total Price: $970</p>
+								</div>
+							</details>
+						</div>
+					</details>
+					<details class="collapsible">
+						<summary class="collapsible-header">
+							<span>Itinerary: 587256</span>
+							<svg class="chevron-icon" viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
+								stroke-width="2" fill="none">
+								<polyline points="6 9 12 15 18 9"></polyline>
+							</svg>
+						</summary>
+						<div class="collapsible-content">
+							<p class="info-item">Booking Date: 2021-09-01</p>
+							<p class="info-item">Start Date: 2021-09-01</p>
+							<p class="info-item">End Date: 2021-09-01</p>
+
+							<details class="collapsible nested">
+								<summary class="collapsible-header">
+									<span>Booking: 4525</span>
+									<svg class="chevron-icon" viewBox="0 0 24 24" width="24" height="24"
+										stroke="currentColor" stroke-width="2" fill="none">
+										<polyline points="6 9 12 15 18 9"></polyline>
+									</svg>
+								</summary>
+								<div class="collapsible-content">
+									<p class="info-item">Product Type: Flight</p>
+									<p class="info-item">Description: Calgary/Toronto/Calgary</p>
+									<p class="info-item">Company: ICELANDAIR</p>
+									<p class="info-item">Contact: 9024967480</p>
+
+									<h3 class="subsection-title">Booking Billing Details</h3>
+									<p class="info-item">Base Price: $895</p>
+									<p class="info-item">Tax Amount: $75</p>
+									<p class="info-item">Total Price: $970</p>
+								</div>
+							</details>
+						</div>
+					</details>
+					<details class="collapsible">
+						<summary class="collapsible-header">
+							<span>Itinerary: 587256</span>
+							<svg class="chevron-icon" viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
+								stroke-width="2" fill="none">
+								<polyline points="6 9 12 15 18 9"></polyline>
+							</svg>
+						</summary>
+						<div class="collapsible-content">
+							<p class="info-item">Booking Date: 2021-09-01</p>
+							<p class="info-item">Start Date: 2021-09-01</p>
+							<p class="info-item">End Date: 2021-09-01</p>
+
+							<details class="collapsible nested">
+								<summary class="collapsible-header">
+									<span>Booking: 4525</span>
+									<svg class="chevron-icon" viewBox="0 0 24 24" width="24" height="24"
+										stroke="currentColor" stroke-width="2" fill="none">
+										<polyline points="6 9 12 15 18 9"></polyline>
+									</svg>
+								</summary>
+								<div class="collapsible-content">
+									<p class="info-item">Product Type: Flight</p>
+									<p class="info-item">Description: Calgary/Toronto/Calgary</p>
+									<p class="info-item">Company: ICELANDAIR</p>
+									<p class="info-item">Contact: 9024967480</p>
+
+									<h3 class="subsection-title">Booking Billing Details</h3>
+									<p class="info-item">Base Price: $895</p>
+									<p class="info-item">Tax Amount: $75</p>
+									<p class="info-item">Total Price: $970</p>
+								</div>
+							</details>
+						</div>
+					</details>
+					<details class="collapsible">
+						<summary class="collapsible-header">
+							<span>Itinerary: 587256</span>
+							<svg class="chevron-icon" viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
+								stroke-width="2" fill="none">
+								<polyline points="6 9 12 15 18 9"></polyline>
+							</svg>
+						</summary>
+						<div class="collapsible-content">
+							<p class="info-item">Booking Date: 2021-09-01</p>
+							<p class="info-item">Start Date: 2021-09-01</p>
+							<p class="info-item">End Date: 2021-09-01</p>
+
+							<details class="collapsible nested">
+								<summary class="collapsible-header">
+									<span>Booking: 4525</span>
+									<svg class="chevron-icon" viewBox="0 0 24 24" width="24" height="24"
+										stroke="currentColor" stroke-width="2" fill="none">
+										<polyline points="6 9 12 15 18 9"></polyline>
+									</svg>
+								</summary>
+								<div class="collapsible-content">
+									<p class="info-item">Product Type: Flight</p>
+									<p class="info-item">Description: Calgary/Toronto/Calgary</p>
+									<p class="info-item">Company: ICELANDAIR</p>
+									<p class="info-item">Contact: 9024967480</p>
+
+									<h3 class="subsection-title">Booking Billing Details</h3>
+									<p class="info-item">Base Price: $895</p>
+									<p class="info-item">Tax Amount: $75</p>
+									<p class="info-item">Total Price: $970</p>
+								</div>
+							</details>
+						</div>
+					</details>
+				</div>
+			</section>
+		</main>
+	</div>
+	<script src="assets/js/client.js"></script>
 </body>
 
 </html>
