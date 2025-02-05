@@ -51,7 +51,7 @@ app.get('/itinerary/:customerID', async (req, res) =>
 
         // Fetch customer information
         const customerQuery = `
-            SELECT first_name, last_name, primary_phone, email, birth_date, address, city, province, country, postal_code
+            SELECT customer_id, first_name, last_name, primary_phone, email, birth_date, address, city, province, country, postal_code
             FROM Customer
             WHERE customer_id = :customerID
         `;
@@ -138,16 +138,17 @@ app.get('/itinerary/:customerID', async (req, res) =>
         // Format the response
         const response = {
             customer: {
-                first_name: customerResult.rows[0][0],
-                last_name: customerResult.rows[0][1],
-                primary_phone: customerResult.rows[0][2],
-                email: customerResult.rows[0][3],
-                birth_date: customerResult.rows[0][4],
-                address: customerResult.rows[0][5],
-                city: customerResult.rows[0][6],
-                province: customerResult.rows[0][7],
-                country: customerResult.rows[0][8],
-                postal_code: customerResult.rows[0][9],
+                customer_id: customerResult.rows[0][0],
+                first_name: customerResult.rows[0][1],
+                last_name: customerResult.rows[0][2],
+                primary_phone: customerResult.rows[0][3],
+                email: customerResult.rows[0][4],
+                birth_date: customerResult.rows[0][5],
+                address: customerResult.rows[0][6],
+                city: customerResult.rows[0][7],
+                province: customerResult.rows[0][8],
+                country: customerResult.rows[0][9],
+                postal_code: customerResult.rows[0][10],
             },
             itineraries
         };

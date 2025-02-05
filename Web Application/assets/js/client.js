@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () =>
         if (/^[0-9]+$/.test(customerSearchInput.value))
         {
             fetchItinerary(parseInt(customerSearchInput.value));
+            customerSearchInput.value = '';
         } else
         {
             alert("This is an invalid input please try again");
@@ -39,7 +40,7 @@ async function fetchItinerary(customerID)
 
         const customer = data.customer;
 
-        RenderGeneralCustomerInfo(customer.first_name, customer.last_name, customer.email, customer.primary_phone, customer.birth_date,
+        RenderGeneralCustomerInfo(customer.customer_id, customer.first_name, customer.last_name, customer.email, customer.primary_phone, customer.birth_date,
             customer.address, customer.city, customer.province, customer.country, customer.postal_code);
         RenderItineraryInfo(data.itineraries);
     } catch (error)
@@ -48,13 +49,14 @@ async function fetchItinerary(customerID)
     }
 }
 
-function RenderGeneralCustomerInfo(firstName, lastName, email, phone, birthDate, address, city, province, country, postalCode)
+function RenderGeneralCustomerInfo(customerID, firstName, lastName, email, phone, birthDate, address, city, province, country, postalCode)
 {
     const fullName = `${firstName} ${lastName}`;
     const infoContainer = document.createElement("div");
     infoContainer.classList.add("info-container");
 
     const customerInfo = [
+        { label: "Customer ID", value: customerID },
         { label: "Name", value: fullName },
         { label: "Email", value: email },
         { label: "Phone", value: phone },
