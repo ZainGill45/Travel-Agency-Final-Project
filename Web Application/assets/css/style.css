@@ -177,6 +177,10 @@ details[open] > .collapsible-header {
   color: var(--text-primary);
 }
 
+.billing-details {
+  margin-bottom: 0.5rem;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .min-h-screen {
