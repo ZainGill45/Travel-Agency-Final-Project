@@ -29,6 +29,14 @@ body {
   padding: 1.5rem;
 }
 
+hr {
+  margin-top: 0.6rem;
+  margin-bottom: 0.3rem;
+  border: 0;
+  border-bottom: 1px dashed #ccc;
+  background: #999;
+}
+
 /* Header Styles */
 .header {
   background-color: var(--card-bg);
@@ -158,6 +166,7 @@ details[open] > summary .chevron-icon {
 
 details[open] > .collapsible-header {
   background-color: #e5e7eb;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .nested {
@@ -177,8 +186,35 @@ details[open] > .collapsible-header {
   color: var(--text-primary);
 }
 
-.billing-details {
-  margin-bottom: 0.5rem;
+.billing-detail {
+  background-color: rgba(0, 0, 0, 0.025);    
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  margin-block: 1rem;
+  padding-block: 0.4rem;
+  padding-inline: 0.8rem;
+}
+
+.collapsible.paid > .collapsible-header {
+    background-color: rgba(0, 255, 0, 0.075);
+}
+
+.collapsible.unpaid > .collapsible-header {
+    background-color: rgba(255, 0, 0, 0.075);
+}
+
+.payment-summary {
+    margin-top: 1rem;
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+
+.payment-summary.paid {
+    background-color: rgba(0, 255, 0, 0.1);
+}
+
+.payment-summary.unpaid {
+    background-color: rgba(255, 0, 0, 0.1);
 }
 
 /* Responsive Design */

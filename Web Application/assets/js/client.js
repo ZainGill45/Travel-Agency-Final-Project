@@ -1,203 +1,236 @@
-const customerItineraryInfoInsertPoint = document.querySelector('#customer-itinerary-insert-point');
-const customerGeneralInfoInsertPoint = document.querySelector('#customer-general-insert-point');
-const customerSearchButton = document.querySelector('#search-button');
-const customerSearchInput = document.querySelector("#search-input");
-
-document.addEventListener("DOMContentLoaded", () =>
-{
-    customerSearchButton.addEventListener("click", () =>
+const UI = {
+    showUserMessage: (message, isError = false) =>
     {
-        customerGeneralInfoInsertPoint.innerHTML = "";
-        customerItineraryInfoInsertPoint.innerHTML = "";
+        alert(message);
+    },
+    createChevronSVG: () => `
+        <svg class="chevron-icon" viewBox="0 0 24 24" width="24" height="24"
+            stroke="currentColor" stroke-width="2" fill="none">
+            <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+    `
+};
 
-        if (/^[0-9]+$/.test(customerSearchInput.value))
+const CONFIG = {
+    API_BASE_URL: 'http://localhost:8000',
+    TRAVEL_CLASS_MAPPINGS: {
+        FST: 'First Class',
+        BSN: 'Business',
+        ECN: 'Economy',
+        OCNVI: 'Ocean View',
+        INT: 'Interior',
+        DELX: 'Deluxe',
+        DBL: 'Double',
+        SNG: 'Single'
+    }
+};
+
+class CustomerItineraryManager
+{
+    constructor()
+    {
+        this.elements = {
+            itineraryInfo: document.querySelector('#customer-itinerary-insert-point'),
+            generalInfo: document.querySelector('#customer-general-insert-point'),
+            searchButton: document.querySelector('#search-button'),
+            searchInput: document.querySelector("#search-input")
+        };
+
+        this.init();
+    }
+
+    init()
+    {
+        document.addEventListener("DOMContentLoaded", () =>
         {
-            fetchItinerary(parseInt(customerSearchInput.value));
-            customerSearchInput.value = '';
-        } else
+            this.elements.searchButton.addEventListener("click", () => this.handleSearch());
+        });
+    }
+
+    async handleSearch()
+    {
+        this.clearDisplays();
+        try
         {
-            alert("This is an invalid input please try again");
+            const customerId = this.validateCustomerId(this.elements.searchInput.value);
+            await this.fetchAndRenderItinerary(customerId);
+            this.elements.searchInput.value = '';
+        } catch (error)
+        {
+            UI.showUserMessage(error.message, true);
         }
+    }
 
-    });
-});
-
-async function fetchItinerary(customerID)
-{
-    try
+    validateCustomerId(input)
     {
-        const response = await fetch(`http://localhost:8000/itinerary/${customerID}`);
-
-        if (!response.ok)
+        const customerId = input.trim();
+        if (!customerId)
         {
-            console.error(`Error: ${response.status} ${response.statusText}`);
-            alert("Customer not found please check input ID")
-            return;
+            throw new Error('Please enter a customer ID');
         }
-
-        const data = await response.json();
-        console.log('Fetched Itinerary Data:', data);
-
-        const customer = data.customer;
-
-        RenderGeneralCustomerInfo(customer.customer_id, customer.first_name, customer.last_name, customer.email, customer.primary_phone, customer.birth_date,
-            customer.address, customer.city, customer.province, customer.country, customer.postal_code);
-        RenderItineraryInfo(data.itineraries);
-    } catch (error)
-    {
-        console.error('Request failed:', error);
-    }
-}
-
-function RenderGeneralCustomerInfo(customerID, firstName, lastName, email, phone, birthDate, address, city, province, country, postalCode)
-{
-    const fullName = `${firstName} ${lastName}`;
-    const infoContainer = document.createElement("div");
-    infoContainer.classList.add("info-container");
-
-    const customerInfo = [
-        { label: "Customer ID", value: customerID },
-        { label: "Name", value: fullName },
-        { label: "Email", value: email },
-        { label: "Phone", value: phone },
-        { label: "Birth Date", value: formatDate(birthDate) },
-        { label: "Address", value: address },
-        { label: "City", value: city },
-        { label: "Province", value: province },
-        { label: "Country", value: country },
-        { label: "Postal Code", value: postalCode }
-    ];
-
-    customerInfo.forEach(({ label, value }) =>
-    {
-        const p = document.createElement("p");
-        p.classList.add("info-item");
-
-        const span = document.createElement("span");
-        span.classList.add("info-label");
-        span.textContent = `${label}: `;
-
-        p.appendChild(span);
-        p.appendChild(document.createTextNode(value ?? "N/A"));
-        infoContainer.appendChild(p);
-    });
-
-    if (customerGeneralInfoInsertPoint)
-    {
-        customerGeneralInfoInsertPoint.appendChild(infoContainer);
-    } else
-    {
-        console.error("Insert point not found!");
-    }
-}
-
-
-function RenderItineraryInfo(itineraries)
-{
-    if (!customerItineraryInfoInsertPoint)
-    {
-        console.error('Insert point element not found');
-        return;
-    }
-
-    const renderedContent = itineraries.map(itineraryElement =>
-    {
-        // Map bookings to HTML strings first
-        const bookingsHTML = itineraryElement.bookings.map(booking =>
+        if (!/^\d+$/.test(customerId))
         {
-            // Generate HTML for all billings
-            const billingsHTML = booking.billings.map(billing => `
-                <div class="billing-details">
-                    <p class="info-item" style="font-weight: 600">Billing ID: ${billing.billing_id ?? "N/A"}</p>
-                    <p class="info-item">Billing Date: ${formatDate(billing.billing_date) ?? "N/A"}</p>
+            throw new Error('Customer ID must contain only numbers');
+        }
+        return parseInt(customerId);
+    }
+
+    clearDisplays()
+    {
+        this.elements.generalInfo.innerHTML = "";
+        this.elements.itineraryInfo.innerHTML = "";
+    }
+
+    async fetchAndRenderItinerary(customerID)
+    {
+        try
+        {
+            const response = await fetch(`${CONFIG.API_BASE_URL}/itinerary/${customerID}`);
+
+            if (!response.ok)
+            {
+                throw new Error(`Customer not found (ID: ${customerID})`);
+            }
+
+            const data = await response.json();
+            this.renderCustomerData(data);
+        } catch (error)
+        {
+            throw new Error(`Failed to fetch customer data: ${error.message}`);
+        }
+    }
+
+    renderCustomerData(data)
+    {
+        const { customer, itineraries } = data;
+        this.renderGeneralInfo(customer);
+        this.renderItineraries(itineraries);
+    }
+
+    renderGeneralInfo(customer)
+    {
+        const infoContainer = document.createElement("div");
+        infoContainer.classList.add("info-container");
+
+        const customerInfo = [
+            { label: "Customer ID", value: customer.customer_id },
+            { label: "Name", value: `${customer.first_name} ${customer.last_name}` },
+            { label: "Email", value: customer.email },
+            { label: "Phone", value: customer.primary_phone },
+            { label: "Birth Date", value: this.formatDate(customer.birth_date) },
+            { label: "Address", value: customer.address },
+            { label: "City", value: customer.city },
+            { label: "Province", value: customer.province },
+            { label: "Country", value: customer.country },
+            { label: "Postal Code", value: customer.postal_code }
+        ];
+
+        infoContainer.innerHTML = customerInfo
+            .map(({ label, value }) => `
+                <p class="info-item">
+                    <span class="info-label">${label}: </span>
+                    ${value ?? "N/A"}
+                </p>
+            `).join('');
+
+        this.elements.generalInfo.appendChild(infoContainer);
+    }
+
+    renderItineraries(itineraries)
+    {
+        if (!this.elements.itineraryInfo) return;
+
+        const itinerariesHTML = itineraries.map(itinerary => this.createItineraryHTML(itinerary)).join('');
+        this.elements.itineraryInfo.innerHTML = itinerariesHTML;
+    }
+
+    calculatePaymentStatus(billings)
+    {
+        const totalAmount = billings.reduce((sum, billing) => sum + (billing.total_amount || 0), 0);
+        const paidAmount = billings.reduce((sum, billing) => sum + (billing.paid_amount || 0), 0);
+        return Math.abs(totalAmount - paidAmount) < 0.01; // Using small epsilon for floating point comparison
+    }
+
+    createItineraryHTML(itinerary)
+    {
+        const allBookingBillings = itinerary.bookings.flatMap(booking => booking.billings);
+        const isFullyPaid = this.calculatePaymentStatus(allBookingBillings);
+        const paymentStatusClass = isFullyPaid ? 'paid' : 'unpaid';
+
+        return `
+            <details class="collapsible ${paymentStatusClass}">
+                <summary class="collapsible-header">
+                    <span>Itinerary: ${itinerary.itinerary_id}</span>
+                    ${UI.createChevronSVG()}
+                </summary>
+                <div class="collapsible-content">
+                    <p class="info-item">Booking Date: ${this.formatDate(itinerary.booking_date)}</p>
+                    <p class="info-item">Travel Class: ${this.getTravelClassName(itinerary.travel_class)}</p>
+                    <p class="info-item">Number of Travellers: ${itinerary.num_of_travellers}</p>
+                    ${this.createBookingsHTML(itinerary.bookings)}
+                </div>
+            </details>
+        `;
+    }
+
+    createBookingsHTML(bookings)
+    {
+        return bookings.map(booking =>
+        {
+            const isFullyPaid = this.calculatePaymentStatus(booking.billings);
+            const paymentStatusClass = isFullyPaid ? 'paid' : 'unpaid';
+
+            return `
+                <details class="collapsible nested ${paymentStatusClass}">
+                    <summary class="collapsible-header">
+                        <span>Booking: ${booking.booking_id}</span>
+                        ${UI.createChevronSVG()}
+                    </summary>
+                    <div class="collapsible-content">
+                        <p class="info-item">Start Date: ${this.formatDate(booking.start_date)}</p>
+                        <p class="info-item">End Date: ${this.formatDate(booking.end_date)}</p>
+                        <p class="info-item">Description: ${booking.description ?? "N/A"}</p>
+                        
+                        ${this.createBillingsHTML(booking.billings)}
+                    </div>
+                </details>
+            `;
+        }).join('');
+    }
+
+    createBillingsHTML(billings)
+    {
+        return `
+                ${billings.map(billing => `
+            <div class="billing-detail">
+                    <p class="info-item billing-id">Billing ID: ${billing.billing_id ?? "N/A"}</p>
+                    <hr>
+                    <p class="info-item">Billing Date: ${this.formatDate(billing.billing_date)}</p>
                     <p class="info-item">Bill Description: ${billing.bill_description ?? "N/A"}</p>
                     <p class="info-item">Base Price: $${billing.base_price ?? "N/A"}</p>
                     <p class="info-item">Agency Fee: $${billing.agency_fee ?? "N/A"}</p>
                     <p class="info-item">Total Amount: $${billing.total_amount ?? "N/A"}</p>
                     <p class="info-item">Paid Amount: $${billing.paid_amount ?? "N/A"}</p>
-                </div>
-            `).join('');
-
-            return `
-                <details class="collapsible nested">
-                    <summary class="collapsible-header">
-                        <span>Booking: ${booking.booking_id}</span>
-                        <svg class="chevron-icon" viewBox="0 0 24 24" width="24" height="24"
-                            stroke="currentColor" stroke-width="2" fill="none">
-                            <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
-                    </summary>
-                    <div class="collapsible-content">
-                        <p class="info-item">Start Date: ${formatDate(booking.start_date) ?? "N/A"}</p>
-                        <p class="info-item">End Date: ${formatDate(booking.end_date) ?? "N/A"}</p>
-                        <p class="info-item">Description: ${booking.description ?? "N/A"}</p>
-
-                        <h3 class="subsection-title">Billing Details</h3>
-                        ${billingsHTML}
-                    </div>
-                </details>
-            `;
-        }).join('');
-
-        let parsedTravelClass;
-        switch (itineraryElement.travel_class)
-        {
-            case 'FST':
-                parsedTravelClass = 'First Class';
-                break;
-            case 'BSN':
-                parsedTravelClass = 'Business';
-                break;
-            case 'ECN':
-                parsedTravelClass = 'Economy';
-                break;
-            case 'OCNVI':
-                parsedTravelClass = 'Ocean View';
-                break;
-            case 'INT':
-                parsedTravelClass = 'Interior';
-                break;
-            case 'DELX':
-                parsedTravelClass = 'Deluxe';
-                break;
-            case 'DBL':
-                parsedTravelClass = 'Double';
-                break;
-            case 'SNG':
-                parsedTravelClass = 'Single';
-                break;
-            default:
-                parsedTravelClass = 'Unknown';
-        }
-
-        return `
-            <details class="collapsible">
-                <summary class="collapsible-header">
-                    <span>Itinerary: ${itineraryElement.itinerary_id}</span>
-                    <svg class="chevron-icon" viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
-                        stroke-width="2" fill="none">
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                    </svg>
-                </summary>
-                <div class="collapsible-content">
-                    <p class="info-item">Booking Date: ${formatDate(itineraryElement.booking_date)}</p>
-                    <p class="info-item">Travel Class: ${parsedTravelClass}</p>
-                    <p class="info-item">Number of Travellers: ${itineraryElement.num_of_travellers}</p>
-                    ${bookingsHTML}
-                </div>
-            </details>
+            </div>
+                `).join('')}
         `;
-    }).join('');
+    }
 
-    customerItineraryInfoInsertPoint.innerHTML = renderedContent;
+    getTravelClassName(code)
+    {
+        return CONFIG.TRAVEL_CLASS_MAPPINGS[code] || 'Unknown';
+    }
+
+    formatDate(dateString)
+    {
+        if (!dateString) return 'N/A';
+        const date = new Date(dateString);
+        return date.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+    }
 }
 
-function formatDate(dateString)
-{
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-    });
-}
+const customerManager = new CustomerItineraryManager();
