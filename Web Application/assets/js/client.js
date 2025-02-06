@@ -32,6 +32,7 @@ class CustomerItineraryManager
         this.elements = {
             itineraryInfo: document.querySelector('#customer-itinerary-insert-point'),
             generalInfo: document.querySelector('#customer-general-insert-point'),
+            customerSearchForm: document.querySelector('#customer-search-form'),
             searchButton: document.querySelector('#search-button'),
             searchInput: document.querySelector("#search-input")
         };
@@ -43,13 +44,17 @@ class CustomerItineraryManager
     {
         document.addEventListener("DOMContentLoaded", () =>
         {
-            this.elements.searchButton.addEventListener("click", () => this.handleSearch());
+            this.elements.customerSearchForm.addEventListener("submit", (submitEvent) => this.handleSearch(submitEvent));
         });
     }
 
-    async handleSearch()
+    async handleSearch(submitEvent)
     {
-        this.clearDisplays();
+        submitEvent.preventDefault();
+
+        this.elements.generalInfo.innerHTML = "";
+        this.elements.itineraryInfo.innerHTML = "";
+
         try
         {
             const customerId = this.validateCustomerId(this.elements.searchInput.value);
@@ -70,15 +75,10 @@ class CustomerItineraryManager
         }
         if (!/^\d+$/.test(customerId))
         {
+            this.elements.searchInput.value = '';
             throw new Error('Customer ID must contain only numbers');
         }
         return parseInt(customerId);
-    }
-
-    clearDisplays()
-    {
-        this.elements.generalInfo.innerHTML = "";
-        this.elements.itineraryInfo.innerHTML = "";
     }
 
     async fetchAndRenderItinerary(customerID)
@@ -88,9 +88,7 @@ class CustomerItineraryManager
             const response = await fetch(`${CONFIG.API_BASE_URL}/itinerary/${customerID}`);
 
             if (!response.ok)
-            {
                 throw new Error(`Customer not found (ID: ${customerID})`);
-            }
 
             const data = await response.json();
             this.renderCustomerData(data);
@@ -103,6 +101,7 @@ class CustomerItineraryManager
     renderCustomerData(data)
     {
         const { customer, itineraries } = data;
+
         this.renderGeneralInfo(customer);
         this.renderItineraries(itineraries);
     }
@@ -148,7 +147,9 @@ class CustomerItineraryManager
     {
         const totalAmount = billings.reduce((sum, billing) => sum + (billing.total_amount || 0), 0);
         const paidAmount = billings.reduce((sum, billing) => sum + (billing.paid_amount || 0), 0);
-        return Math.abs(totalAmount - paidAmount) < 0.01; // Using small epsilon for floating point comparison
+
+        // Using small epsilon for floating point comparison
+        return Math.abs(totalAmount - paidAmount) < 0.01;
     }
 
     createItineraryHTML(itinerary)
