@@ -3,7 +3,7 @@ BEGIN
 END;
 /
 
-CREATE OR REPLACE PROCEDURE create_ta_tables AS
+CREATE OR REPLACE PROCEDURE create_ta_tables AUTHID CURRENT_USER AS
     v_table_exists NUMBER;
 BEGIN
     -- Drop existing tables if they exist

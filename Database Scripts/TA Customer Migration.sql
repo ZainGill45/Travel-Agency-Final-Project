@@ -3,7 +3,7 @@ BEGIN
 END;
 /
 
-CREATE OR REPLACE PROCEDURE migrate_customer_data AS
+CREATE OR REPLACE PROCEDURE migrate_customer_data AUTHID CURRENT_USER AS
     v_current_email VARCHAR2(128);
     v_current_postal_code VARCHAR2(10);
 BEGIN

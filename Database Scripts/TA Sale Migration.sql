@@ -3,7 +3,7 @@ BEGIN
 END;
 /
 
-CREATE OR REPLACE PROCEDURE migrate_sale_data AS
+CREATE OR REPLACE PROCEDURE migrate_sale_data AUTHID CURRENT_USER AS
     v_current_class            VARCHAR2(5);
     v_current_bill_description VARCHAR2(64);
     v_agent_id                 NUMBER;
