@@ -18,8 +18,10 @@ const CONFIG = {
         BSN: 'Business',
         ECN: 'Economy',
         OCNVI: 'Ocean View',
+        OCNV: 'Ocean View',
         INT: 'Interior',
         DELX: 'Deluxe',
+        DLX: 'Deluxe',
         DBL: 'Double',
         SNG: 'Single'
     }
